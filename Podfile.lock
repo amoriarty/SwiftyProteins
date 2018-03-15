@@ -1,0 +1,21 @@
+PODS:
+  - ToolboxLGNT (0.1.3)
+
+DEPENDENCIES:
+  - ToolboxLGNT (from `git@github.com:amoriarty/ToolboxLGNT.git`)
+
+EXTERNAL SOURCES:
+  ToolboxLGNT:
+    :git: git@github.com:amoriarty/ToolboxLGNT.git
+
+CHECKOUT OPTIONS:
+  ToolboxLGNT:
+    :commit: 09d8ad7a38ea8473af2a50c049cf1297164fe633
+    :git: git@github.com:amoriarty/ToolboxLGNT.git
+
+SPEC CHECKSUMS:
+  ToolboxLGNT: 1c466dd586aa91ca3a931e4af0fc4b35d6de0f93
+
+PODFILE CHECKSUM: b1c56debb1755831bfd4ff8e852990e976f1a531
+
+COCOAPODS: 1.4.0
