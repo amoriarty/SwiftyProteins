@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /* Create a new window and make it visible */
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: LigantsController())
+        window?.rootViewController = UINavigationController(rootViewController: LigandsController())
         
         /* Hiding interface in multitasking mode */
         application.ignoreSnapshotOnNextApplicationLaunch()

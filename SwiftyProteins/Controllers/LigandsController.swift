@@ -1,5 +1,5 @@
 //
-//  LigantsController.swift
+//  LigandsController.swift
 //  SwiftyProteins
 //
 //  Created by Alexandre LEGENT on 3/15/18.
@@ -9,10 +9,10 @@
 import UIKit
 import ToolboxLGNT
 
-class LigantsController: GenericTableViewController<LigantCell, String> {
+class LigandsController: GenericTableViewController<LigantCell, String> {
     private let proteinController = ProteinController()
     override var items: [[String]]? {
-        return [["AA", "BB", "CCC"]]
+        return [LigandsService.shared.ligands]
     }
     
     // MARK:- View Lifecycle
@@ -32,7 +32,7 @@ class LigantsController: GenericTableViewController<LigantCell, String> {
         view.backgroundColor = Colors.background
     }
     
-    //MARK:- Table View Delegat
+    //MARK:- Table View Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let protein = items?[indexPath.section][indexPath.item]
         proteinController.title = protein

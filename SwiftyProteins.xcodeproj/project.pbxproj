@@ -9,13 +9,15 @@
 /* Begin PBXBuildFile section */
 		31C8C7E9155B124F2C660059 /* Pods_SwiftyProteins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1BE2D25AB14E3BDBE8EA45 /* Pods_SwiftyProteins.framework */; };
 		EC269333205A6B870022F39E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC269332205A6B870022F39E /* AppDelegate.swift */; };
-		EC269335205A6B870022F39E /* LigantsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC269334205A6B870022F39E /* LigantsController.swift */; };
+		EC269335205A6B870022F39E /* LigandsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC269334205A6B870022F39E /* LigandsController.swift */; };
 		EC26933A205A6B870022F39E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC269339205A6B870022F39E /* Assets.xcassets */; };
 		EC26933D205A6B870022F39E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC26933B205A6B870022F39E /* LaunchScreen.storyboard */; };
 		EC269347205A70670022F39E /* LigantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC269346205A70670022F39E /* LigantCell.swift */; };
 		EC269349205A77230022F39E /* ProteinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC269348205A77230022F39E /* ProteinController.swift */; };
 		EC26934B205A77E90022F39E /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC26934A205A77E90022F39E /* AuthenticationController.swift */; };
 		EC26934D205A7E340022F39E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC26934C205A7E340022F39E /* Constants.swift */; };
+		EC26934F205AB87F0022F39E /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = EC26934E205AB87F0022F39E /* ligands.txt */; };
+		EC269352205AB9A30022F39E /* LigandsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC269351205AB9A30022F39E /* LigandsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +26,7 @@
 		53C85320DBA2415D7C75251B /* Pods-SwiftyProteins.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyProteins.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyProteins/Pods-SwiftyProteins.debug.xcconfig"; sourceTree = "<group>"; };
 		EC26932F205A6B870022F39E /* SwiftyProteins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyProteins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC269332205A6B870022F39E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EC269334205A6B870022F39E /* LigantsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigantsController.swift; sourceTree = "<group>"; };
+		EC269334205A6B870022F39E /* LigandsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandsController.swift; sourceTree = "<group>"; };
 		EC269339205A6B870022F39E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC26933C205A6B870022F39E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC26933E205A6B870022F39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -32,6 +34,8 @@
 		EC269348205A77230022F39E /* ProteinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinController.swift; sourceTree = "<group>"; };
 		EC26934A205A77E90022F39E /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		EC26934C205A7E340022F39E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EC26934E205AB87F0022F39E /* ligands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ligands.txt; sourceTree = "<group>"; };
+		EC269351205AB9A30022F39E /* LigandsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandsService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,8 @@
 				EC26934C205A7E340022F39E /* Constants.swift */,
 				EC269344205A6EBF0022F39E /* Controllers */,
 				EC269345205A6FC70022F39E /* Views */,
+				EC269350205AB98D0022F39E /* Services */,
+				EC26934E205AB87F0022F39E /* ligands.txt */,
 				EC269339205A6B870022F39E /* Assets.xcassets */,
 				EC26933B205A6B870022F39E /* LaunchScreen.storyboard */,
 				EC26933E205A6B870022F39E /* Info.plist */,
@@ -99,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				EC26934A205A77E90022F39E /* AuthenticationController.swift */,
-				EC269334205A6B870022F39E /* LigantsController.swift */,
+				EC269334205A6B870022F39E /* LigandsController.swift */,
 				EC269348205A77230022F39E /* ProteinController.swift */,
 			);
 			path = Controllers;
@@ -111,6 +117,14 @@
 				EC269346205A70670022F39E /* LigantCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		EC269350205AB98D0022F39E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EC269351205AB9A30022F39E /* LigandsService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC26933D205A6B870022F39E /* LaunchScreen.storyboard in Resources */,
+				EC26934F205AB87F0022F39E /* ligands.txt in Resources */,
 				EC26933A205A6B870022F39E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,10 +256,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC269335205A6B870022F39E /* LigantsController.swift in Sources */,
+				EC269335205A6B870022F39E /* LigandsController.swift in Sources */,
 				EC269347205A70670022F39E /* LigantCell.swift in Sources */,
 				EC269333205A6B870022F39E /* AppDelegate.swift in Sources */,
 				EC269349205A77230022F39E /* ProteinController.swift in Sources */,
+				EC269352205AB9A30022F39E /* LigandsService.swift in Sources */,
 				EC26934B205A77E90022F39E /* AuthenticationController.swift in Sources */,
 				EC26934D205A7E340022F39E /* Constants.swift in Sources */,
 			);
