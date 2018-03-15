@@ -24,7 +24,6 @@ class LigantsController: GenericTableViewController<LigantCell, String> {
         /* Present login controller */
         let controller = AuthenticationController()
         navigationController?.present(controller, animated: true, completion: nil)
-//        present(controller, animated: true, completion: nil)
     }
     
     // MARK:- Setup

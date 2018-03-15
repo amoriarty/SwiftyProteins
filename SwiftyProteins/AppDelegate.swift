@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         window?.rootViewController = UINavigationController(rootViewController: LigantsController())
+        
+        /* Hiding interface in multitasking mode */
+        application.ignoreSnapshotOnNextApplicationLaunch()
+        
         return true
     }
 
@@ -26,8 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        /* Getting back navigation controller and pushing an Authentication Controller to force user to reauthenticate when coming back on the app. */
+        guard let navigationController = window?.rootViewController as? UINavigationController else { return }
+        let authController = AuthenticationController()
+        navigationController.present(authController, animated: true, completion: nil)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
