@@ -9,17 +9,18 @@
 import UIKit
 import ToolboxLGNT
 
-class LigandsController: GenericTableViewController<LigantCell, String> {
+class LigandsController: GenericTableViewController<LigantCell, String>, UISearchResultsUpdating {
     private let proteinController = ProteinController()
+    private var presentedLigants = LigandsService.shared.ligands
     override var items: [[String]]? {
-        return [LigandsService.shared.ligands]
+        return [presentedLigants]
     }
     
     // MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Ligants"
-        navigationController?.navigationBar.prefersLargeTitles = true
+        setupNavBar()
         
         /* Present login controller */
         let controller = AuthenticationController()
@@ -32,11 +33,31 @@ class LigandsController: GenericTableViewController<LigantCell, String> {
         view.backgroundColor = Colors.background
     }
     
-    //MARK:- Table View Delegate
+    private func setupNavBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.searchController = UISearchController(searchResultsController: nil)
+        navigationItem.searchController?.searchResultsUpdater = self
+        navigationItem.searchController?.dimsBackgroundDuringPresentation = false
+    }
+    
+    // MARK:- Table View Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let protein = items?[indexPath.section][indexPath.item]
         proteinController.title = protein
+        navigationItem.searchController?.isActive = false
         navigationController?.pushViewController(proteinController, animated: true)
+    }
+    
+    // MARK:- Search Results Updating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let search = searchController.searchBar.text, search != "" else {
+            presentedLigants = LigandsService.shared.ligands
+            tableView.reloadData()
+            return
+        }
+        
+        presentedLigants = LigandsService.shared.ligands.filter { $0.contains(search) }
+        tableView.reloadData()
     }
 }
 

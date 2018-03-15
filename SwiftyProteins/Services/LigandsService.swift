@@ -15,6 +15,6 @@ class LigandsService {
     init() {
         guard let location = Bundle.main.path(forResource: "ligands", ofType: "txt") else { fatalError() }
         guard let text = try? String(contentsOf: URL(fileURLWithPath: location)) else { fatalError() }
-        ligands = text.components(separatedBy: "\n")
+        ligands = text.components(separatedBy: "\n").filter { $0 != "" }
     }
 }
