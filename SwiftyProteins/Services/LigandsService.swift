@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SceneKit
 
 final class LigandsService {
     static let shared = LigandsService()
@@ -56,7 +57,7 @@ final class LigandsService {
             guard let x = Double(atom[0]) else { return nil }
             guard let y = Double(atom[1]) else { return nil }
             guard let z = Double(atom[2]) else { return nil }
-            let coordinate = Coordinate(x: x, y: y, z: z)
+            let coordinate = SCNVector3(x, y, z)
             
             return Atom(type: type, cooridate: coordinate)
         }

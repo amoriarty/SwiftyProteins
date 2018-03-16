@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SceneKit
 
 enum AtomType: String {
     case AS, B, BR, C, CA, CL, CO, CR, F, FE, H, I, MG, MN, MO, N, O, P, PT, RH, RU, S, SE, V, W
@@ -15,5 +16,5 @@ enum AtomType: String {
 
 struct Atom {
     let type: AtomType
-    let cooridate: Coordinate
+    let cooridate: SCNVector3
 }

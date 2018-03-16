@@ -19,7 +19,6 @@
 		EC26934D205A7E340022F39E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC26934C205A7E340022F39E /* Constants.swift */; };
 		EC26934F205AB87F0022F39E /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = EC26934E205AB87F0022F39E /* ligands.txt */; };
 		EC269352205AB9A30022F39E /* LigandsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC269351205AB9A30022F39E /* LigandsService.swift */; };
-		ECA0F0CC205BCB9900B7DA22 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0F0CB205BCB9900B7DA22 /* Coordinate.swift */; };
 		ECA0F0D0205BCDBC00B7DA22 /* Ligand.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0F0CF205BCDBC00B7DA22 /* Ligand.swift */; };
 		ECA89846205BDCE600CEECAC /* Atom.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA89845205BDCE600CEECAC /* Atom.swift */; };
 /* End PBXBuildFile section */
@@ -41,7 +40,6 @@
 		EC26934C205A7E340022F39E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EC26934E205AB87F0022F39E /* ligands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ligands.txt; sourceTree = "<group>"; };
 		EC269351205AB9A30022F39E /* LigandsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandsService.swift; sourceTree = "<group>"; };
-		ECA0F0CB205BCB9900B7DA22 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		ECA0F0CF205BCDBC00B7DA22 /* Ligand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ligand.swift; sourceTree = "<group>"; };
 		ECA89845205BDCE600CEECAC /* Atom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atom.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,7 +137,6 @@
 		ECA0F0CA205BCB7200B7DA22 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				ECA0F0CB205BCB9900B7DA22 /* Coordinate.swift */,
 				EC02FA74205BD6B9006F6A67 /* Link.swift */,
 				ECA0F0CF205BCDBC00B7DA22 /* Ligand.swift */,
 				ECA89845205BDCE600CEECAC /* Atom.swift */,
@@ -280,7 +277,6 @@
 				EC269347205A70670022F39E /* LigantCell.swift in Sources */,
 				EC269333205A6B870022F39E /* AppDelegate.swift in Sources */,
 				EC02FA75205BD6B9006F6A67 /* Link.swift in Sources */,
-				ECA0F0CC205BCB9900B7DA22 /* Coordinate.swift in Sources */,
 				ECA89846205BDCE600CEECAC /* Atom.swift in Sources */,
 				EC269349205A77230022F39E /* ProteinController.swift in Sources */,
 				ECA0F0D0205BCDBC00B7DA22 /* Ligand.swift in Sources */,

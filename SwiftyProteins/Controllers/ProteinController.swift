@@ -42,6 +42,7 @@ final class ProteinController: GenericViewController {
     // MARK:- View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
         
         // TODO: Remove debug form
         // DEBUG
@@ -63,5 +64,15 @@ final class ProteinController: GenericViewController {
     override func setupLayouts() {
         super.setupLayouts()
         _ = sceneView.fill(view.safeAreaLayoutGuide)
+    }
+    
+    private func setupNavBar() {
+        let button = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(handleShare))
+        navigationItem.rightBarButtonItem = button
+    }
+    
+    // MARK:- Button handler
+    @objc func handleShare() {
+        // TODO: Implement handle share
     }
 }
