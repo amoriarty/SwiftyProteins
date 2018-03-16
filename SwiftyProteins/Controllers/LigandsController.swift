@@ -11,6 +11,7 @@ import ToolboxLGNT
 
 final class LigandsController: GenericTableViewController<LigantCell, String>, UISearchResultsUpdating {
     private let proteinController = ProteinController()
+    private var selectionLock = false
     private var presentedLigants = LigandsService.shared.ligands
     override var items: [[String]]? {
         return [presentedLigants]
@@ -43,6 +44,10 @@ final class LigandsController: GenericTableViewController<LigantCell, String>, U
     
     // MARK:- Table View Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /* Checking that a cell isn't already selected */
+        guard selectionLock == false else { return }
+        selectionLock = true
+        
         /* Starting cell indicator */
         guard let cell = tableView.cellForRow(at: indexPath) as? LigantCell else { return }
         cell.startAnimating()
@@ -50,23 +55,38 @@ final class LigandsController: GenericTableViewController<LigantCell, String>, U
         /* Getting correct ligand from internet */
         guard let protein = items?[indexPath.section][indexPath.item] else { return }
         LigandsService.shared.getSDF(for: protein) { [unowned self] ligand in
+            /* Unlocking selection */
+            self.selectionLock = false
+            
+            /* Stoping cell animation */
+            cell.stopAnimating()
+            
+            /* Deactivate search controller in order to push another one */
+            self.navigationItem.searchController?.isActive = false
+            
+            /* Presenting alert if ligand loading failed. */
             guard let ligand = ligand else {
-                // TODO: Create error alert
+                let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                    alert.dismiss(animated: true, completion: nil)
+                })
+                
+                alert.title = "Loading ligand failed"
+                alert.message = "An error occured while loading ligands from RCSB"
+                alert.addAction(cancel)
+                self.navigationController?.present(alert, animated: true, completion: nil)
                 return
             }
             
             /* Ligand correctly get, configuring and pushing protein controller */
             self.proteinController.ligand = ligand
-            self.navigationItem.searchController?.isActive = false
             self.navigationController?.pushViewController(self.proteinController, animated: true)
-            cell.stopAnimating()
         }
     }
     
     // MARK:- Search Results Updating Delegate
-    // TODO: Don't be case sensitive.
     func updateSearchResults(for searchController: UISearchController) {
-        guard let search = searchController.searchBar.text, search != "" else {
+        guard let search = searchController.searchBar.text?.uppercased(), search != "" else {
             presentedLigants = LigandsService.shared.ligands
             tableView.reloadData()
             return

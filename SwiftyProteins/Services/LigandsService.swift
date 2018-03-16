@@ -25,17 +25,7 @@ final class LigandsService {
         }
         
         URLSession.shared.dataTask(with: url) { [unowned self] data, _, error in
-            guard error == nil else {
-                DispatchQueue.main.async { completion(nil) }
-                return
-            }
-            
-            guard let data = data else {
-                DispatchQueue.main.async { completion(nil) }
-                return
-            }
-            
-            guard let file = String(data: data, encoding: .utf8) else {
+            guard error == nil, let data = data, let file = String(data: data, encoding: .utf8) else {
                 DispatchQueue.main.async { completion(nil) }
                 return
             }
@@ -54,7 +44,7 @@ final class LigandsService {
         let descriptor = lines[3].components(separatedBy: " ").filter { $0 != "" }
         
         /* Getting ending atom line */
-        guard let atomIndex = Int(descriptor[1]) else { return nil }
+        guard let atomIndex = Int(descriptor[1]), atomIndex >= 4 else { return nil }
         
         /* Convert atoms lines into Atom */
         let atoms = lines[4...atomIndex].flatMap { line -> Atom? in
