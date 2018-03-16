@@ -33,6 +33,7 @@ final class LigandsController: GenericTableViewController<LigantCell, String>, U
         view.backgroundColor = Colors.background
     }
     
+    /* Setup navigation bar and integrate search bar controller */
     private func setupNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = UISearchController(searchResultsController: nil)
@@ -47,14 +48,14 @@ final class LigandsController: GenericTableViewController<LigantCell, String>, U
         cell.startAnimating()
         
         /* Preparing protein controller */
-        let protein = items?[indexPath.section][indexPath.item]
+        guard let protein = items?[indexPath.section][indexPath.item] else { return }
         proteinController.title = protein
         navigationItem.searchController?.isActive = false
         
-        // DEBUG WAIT
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [unowned self] _ in
-            cell.stopAnimating()
+        /* Getting SDF file and pushing protein controller */
+        LigandsService.shared.getSDF(for: protein) { [unowned self] in
             self.navigationController?.pushViewController(self.proteinController, animated: true)
+            cell.stopAnimating()
         }
     }
     
