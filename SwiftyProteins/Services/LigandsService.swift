@@ -18,30 +18,72 @@ final class LigandsService {
         ligands = text.components(separatedBy: "\n").filter { $0 != "" }
     }
     
-    func getSDF(for ligand: String, completion: @escaping () -> Void) {
+    func getSDF(for ligand: String, completion: @escaping (Ligand?) -> Void) {
         guard let url = URL(string: "https://files.rcsb.org/ligands/view/\(ligand)_model.sdf") else {
-            completion()
+            completion(nil)
             return
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: url) { [unowned self] data, _, error in
             guard error == nil else {
-                DispatchQueue.main.async { completion() }
+                DispatchQueue.main.async { completion(nil) }
                 return
             }
             
             guard let data = data else {
-                DispatchQueue.main.async { completion() }
+                DispatchQueue.main.async { completion(nil) }
                 return
             }
             
-            // DEBUG
-            let string = String(data: data, encoding: .utf8)
-            print(string as Any)
-            // END DEBUG
+            guard let file = String(data: data, encoding: .utf8) else {
+                DispatchQueue.main.async { completion(nil) }
+                return
+            }
             
-            DispatchQueue.main.async { completion() }
+            let ligand = self.parseSDF(file)
+            DispatchQueue.main.async { completion(ligand) }
             
         }.resume()
+    }
+    
+    private func parseSDF(_ file: String) -> Ligand? {
+        /* Spliting file by lines */
+        let lines = file.components(separatedBy: "\n")
+        
+        /* Getting the line descriptor and spliting it by space */
+        let descriptor = lines[3].components(separatedBy: " ").filter { $0 != "" }
+        
+        /* Getting ending atom line */
+        guard let atomIndex = Int(descriptor[1]) else { return nil }
+        
+        /* Convert atoms lines into Atom */
+        let atoms = lines[4...atomIndex].flatMap { line -> Atom? in
+            /* Splitting atom line */
+            let atom = line.components(separatedBy: " ").filter { $0 != "" }
+            
+            /* Creating non nil variable */
+            guard let type = AtomType(rawValue: atom[3]) else { return nil }
+            guard let x = Double(atom[0]) else { return nil }
+            guard let y = Double(atom[1]) else { return nil }
+            guard let z = Double(atom[2]) else { return nil }
+            let coordinate = Coordinate(x: x, y: y, z: z)
+            
+            return Atom(type: type, cooridate: coordinate)
+        }
+        
+        /* Convert links into Link */
+        let links = lines[atomIndex + 1 ... lines.count - 4].flatMap { line -> Link? in
+            /* Splitting link line */
+            let link = line.components(separatedBy: " ").filter { $0 != "" }
+            
+            /* Creating non nil variable */
+            guard let left = Int(link[0]) else { return nil }
+            guard let right = Int(link[1]) else { return nil }
+            guard let number = Int(link[2]) else { return nil }
+            
+            return Link(left: left, right: right, number: number)
+        }
+        
+        return Ligand(name: lines[0], atoms: atoms, links: links)
     }
 }

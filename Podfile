@@ -6,5 +6,5 @@ target 'SwiftyProteins' do
   use_frameworks!
 
   # Pods for SwiftyProteins
-  pod 'ToolboxLGNT', :git => "git@github.com:amoriarty/ToolboxLGNT.git"
+  pod 'ToolboxLGNT'
 end

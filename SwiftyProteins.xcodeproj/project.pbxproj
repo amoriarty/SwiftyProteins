@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		31C8C7E9155B124F2C660059 /* Pods_SwiftyProteins.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1BE2D25AB14E3BDBE8EA45 /* Pods_SwiftyProteins.framework */; };
+		EC02FA75205BD6B9006F6A67 /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02FA74205BD6B9006F6A67 /* Link.swift */; };
 		EC269333205A6B870022F39E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC269332205A6B870022F39E /* AppDelegate.swift */; };
 		EC269335205A6B870022F39E /* LigandsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC269334205A6B870022F39E /* LigandsController.swift */; };
 		EC26933A205A6B870022F39E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC269339205A6B870022F39E /* Assets.xcassets */; };
@@ -18,12 +19,16 @@
 		EC26934D205A7E340022F39E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC26934C205A7E340022F39E /* Constants.swift */; };
 		EC26934F205AB87F0022F39E /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = EC26934E205AB87F0022F39E /* ligands.txt */; };
 		EC269352205AB9A30022F39E /* LigandsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC269351205AB9A30022F39E /* LigandsService.swift */; };
+		ECA0F0CC205BCB9900B7DA22 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0F0CB205BCB9900B7DA22 /* Coordinate.swift */; };
+		ECA0F0CE205BCBE400B7DA22 /* Atom.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0F0CD205BCBE400B7DA22 /* Atom.swift */; };
+		ECA0F0D0205BCDBC00B7DA22 /* Ligand.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0F0CF205BCDBC00B7DA22 /* Ligand.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C76F09256BD8E29960E37CE /* Pods-SwiftyProteins.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyProteins.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyProteins/Pods-SwiftyProteins.release.xcconfig"; sourceTree = "<group>"; };
 		4C1BE2D25AB14E3BDBE8EA45 /* Pods_SwiftyProteins.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyProteins.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C85320DBA2415D7C75251B /* Pods-SwiftyProteins.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyProteins.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyProteins/Pods-SwiftyProteins.debug.xcconfig"; sourceTree = "<group>"; };
+		EC02FA74205BD6B9006F6A67 /* Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		EC26932F205A6B870022F39E /* SwiftyProteins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyProteins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC269332205A6B870022F39E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC269334205A6B870022F39E /* LigandsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandsController.swift; sourceTree = "<group>"; };
@@ -36,6 +41,9 @@
 		EC26934C205A7E340022F39E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EC26934E205AB87F0022F39E /* ligands.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ligands.txt; sourceTree = "<group>"; };
 		EC269351205AB9A30022F39E /* LigandsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandsService.swift; sourceTree = "<group>"; };
+		ECA0F0CB205BCB9900B7DA22 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		ECA0F0CD205BCBE400B7DA22 /* Atom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Atom.swift; path = /Users/alegent/Works/SwiftyProteins/SwiftyProteins/Models/Atom.swift; sourceTree = "<absolute>"; };
+		ECA0F0CF205BCDBC00B7DA22 /* Ligand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ligand.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +99,7 @@
 				EC269332205A6B870022F39E /* AppDelegate.swift */,
 				EC26934C205A7E340022F39E /* Constants.swift */,
 				EC269344205A6EBF0022F39E /* Controllers */,
+				ECA0F0CA205BCB7200B7DA22 /* Models */,
 				EC269345205A6FC70022F39E /* Views */,
 				EC269350205AB98D0022F39E /* Services */,
 				EC26934E205AB87F0022F39E /* ligands.txt */,
@@ -125,6 +134,17 @@
 				EC269351205AB9A30022F39E /* LigandsService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		ECA0F0CA205BCB7200B7DA22 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ECA0F0CD205BCBE400B7DA22 /* Atom.swift */,
+				ECA0F0CB205BCB9900B7DA22 /* Coordinate.swift */,
+				EC02FA74205BD6B9006F6A67 /* Link.swift */,
+				ECA0F0CF205BCDBC00B7DA22 /* Ligand.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,9 +277,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC269335205A6B870022F39E /* LigandsController.swift in Sources */,
+				ECA0F0CE205BCBE400B7DA22 /* Atom.swift in Sources */,
 				EC269347205A70670022F39E /* LigantCell.swift in Sources */,
 				EC269333205A6B870022F39E /* AppDelegate.swift in Sources */,
+				EC02FA75205BD6B9006F6A67 /* Link.swift in Sources */,
+				ECA0F0CC205BCB9900B7DA22 /* Coordinate.swift in Sources */,
 				EC269349205A77230022F39E /* ProteinController.swift in Sources */,
+				ECA0F0D0205BCDBC00B7DA22 /* Ligand.swift in Sources */,
 				EC269352205AB9A30022F39E /* LigandsService.swift in Sources */,
 				EC26934B205A77E90022F39E /* AuthenticationController.swift in Sources */,
 				EC26934D205A7E340022F39E /* Constants.swift in Sources */,

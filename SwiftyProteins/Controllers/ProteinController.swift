@@ -10,6 +10,12 @@ import UIKit
 import ToolboxLGNT
 
 final class ProteinController: GenericViewController {
+    var ligand: Ligand? {
+        didSet {
+            guard let ligand = ligand else { return }
+            title = ligand.name
+        }
+    }
     
     // MARK:- Setups
     override func setupViews() {

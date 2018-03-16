@@ -47,19 +47,24 @@ final class LigandsController: GenericTableViewController<LigantCell, String>, U
         guard let cell = tableView.cellForRow(at: indexPath) as? LigantCell else { return }
         cell.startAnimating()
         
-        /* Preparing protein controller */
+        /* Getting correct ligand from internet */
         guard let protein = items?[indexPath.section][indexPath.item] else { return }
-        proteinController.title = protein
-        navigationItem.searchController?.isActive = false
-        
-        /* Getting SDF file and pushing protein controller */
-        LigandsService.shared.getSDF(for: protein) { [unowned self] in
+        LigandsService.shared.getSDF(for: protein) { [unowned self] ligand in
+            guard let ligand = ligand else {
+                // TODO: Create error alert
+                return
+            }
+            
+            /* Ligand correctly get, configuring and pushing protein controller */
+            self.proteinController.ligand = ligand
+            self.navigationItem.searchController?.isActive = false
             self.navigationController?.pushViewController(self.proteinController, animated: true)
             cell.stopAnimating()
         }
     }
     
     // MARK:- Search Results Updating Delegate
+    // TODO: Don't be case sensitive.
     func updateSearchResults(for searchController: UISearchController) {
         guard let search = searchController.searchBar.text, search != "" else {
             presentedLigants = LigandsService.shared.ligands

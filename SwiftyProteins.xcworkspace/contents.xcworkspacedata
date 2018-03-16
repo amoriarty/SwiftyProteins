@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/alegent/Works/SwiftyProteins/SwiftyProteins/Models/Atom.swift">
+   </FileRef>
+   <FileRef
       location = "group:SwiftyProteins.xcodeproj">
    </FileRef>
    <FileRef
