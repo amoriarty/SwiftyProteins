@@ -9,7 +9,7 @@
 import UIKit
 import ToolboxLGNT
 
-class LigandsController: GenericTableViewController<LigantCell, String>, UISearchResultsUpdating {
+final class LigandsController: GenericTableViewController<LigantCell, String>, UISearchResultsUpdating {
     private let proteinController = ProteinController()
     private var presentedLigants = LigandsService.shared.ligands
     override var items: [[String]]? {
@@ -42,10 +42,20 @@ class LigandsController: GenericTableViewController<LigantCell, String>, UISearc
     
     // MARK:- Table View Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /* Starting cell indicator */
+        guard let cell = tableView.cellForRow(at: indexPath) as? LigantCell else { return }
+        cell.startAnimating()
+        
+        /* Preparing protein controller */
         let protein = items?[indexPath.section][indexPath.item]
         proteinController.title = protein
         navigationItem.searchController?.isActive = false
-        navigationController?.pushViewController(proteinController, animated: true)
+        
+        // DEBUG WAIT
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [unowned self] _ in
+            cell.stopAnimating()
+            self.navigationController?.pushViewController(self.proteinController, animated: true)
+        }
     }
     
     // MARK:- Search Results Updating Delegate

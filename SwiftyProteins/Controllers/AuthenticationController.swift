@@ -10,7 +10,7 @@ import UIKit
 import ToolboxLGNT
 import LocalAuthentication
 
-class AuthenticationController: GenericViewController {
+final class AuthenticationController: GenericViewController {
     private let authContext = LAContext()
     
     // MARK:- Views

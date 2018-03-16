@@ -9,7 +9,7 @@
 import UIKit
 import ToolboxLGNT
 
-class ProteinController: GenericViewController {
+final class ProteinController: GenericViewController {
     
     // MARK:- Setups
     override func setupViews() {

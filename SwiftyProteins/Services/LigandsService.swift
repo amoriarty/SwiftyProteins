@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LigandsService {
+final class LigandsService {
     static let shared = LigandsService()
     let ligands: [String]
     
