@@ -25,7 +25,7 @@ final class LigandsController: GenericTableViewController<LigantCell, String>, U
         
         /* Present login controller */
         let controller = AuthenticationController()
-        navigationController?.present(controller, animated: true, completion: nil)
+        navigationController?.present(controller, animated: false, completion: nil)
     }
     
     // MARK:- Setup
