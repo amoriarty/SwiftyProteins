@@ -96,6 +96,7 @@ final class ProteinController: GenericViewController {
         }
         
         /* Adding all links between atoms */
+        // TODO: Print multiple connexion when needed.
         ligand.links.forEach { link in
             let left = atomNodes[link.left - 1].position
             let right = atomNodes[link.right - 1].position
