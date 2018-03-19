@@ -10,6 +10,7 @@ import UIKit
 import ToolboxLGNT
 import LocalAuthentication
 
+// TODO: Can't get out of authentication, even when pressing home.
 final class AuthenticationController: GenericViewController {
     private let authContext = LAContext()
     

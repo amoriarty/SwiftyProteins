@@ -16,5 +16,5 @@ enum AtomType: String {
 
 struct Atom {
     let type: AtomType
-    let cooridate: SCNVector3
+    let position: SCNVector3
 }

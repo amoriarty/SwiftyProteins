@@ -59,7 +59,7 @@ final class LigandsService {
             guard let z = Double(atom[2]) else { return nil }
             let coordinate = SCNVector3(x, y, z)
             
-            return Atom(type: type, cooridate: coordinate)
+            return Atom(type: type, position: coordinate)
         }
         
         /* Convert links into Link */
@@ -67,10 +67,11 @@ final class LigandsService {
             /* Splitting link line */
             let link = line.components(separatedBy: " ").filter { $0 != "" }
             
-            /* Creating non nil variable */
+            /* Creating non nil variable, and check that atoms identifier aren't out of bounds. */
             guard let left = Int(link[0]) else { return nil }
             guard let right = Int(link[1]) else { return nil }
             guard let number = Int(link[2]) else { return nil }
+            guard left < atoms.count, right < atoms.count else { return nil }
             
             return Link(left: left, right: right, number: number)
         }

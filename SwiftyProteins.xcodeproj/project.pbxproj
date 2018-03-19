@@ -21,6 +21,8 @@
 		EC269352205AB9A30022F39E /* LigandsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC269351205AB9A30022F39E /* LigandsService.swift */; };
 		ECA0F0D0205BCDBC00B7DA22 /* Ligand.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0F0CF205BCDBC00B7DA22 /* Ligand.swift */; };
 		ECA89846205BDCE600CEECAC /* Atom.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA89845205BDCE600CEECAC /* Atom.swift */; };
+		ECAF7251205FF95300E6A730 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF7250205FF95300E6A730 /* SCNVector3.swift */; };
+		ECAF7254206027E300E6A730 /* SCNMatrix4.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF7253206027E300E6A730 /* SCNMatrix4.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		EC269351205AB9A30022F39E /* LigandsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandsService.swift; sourceTree = "<group>"; };
 		ECA0F0CF205BCDBC00B7DA22 /* Ligand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ligand.swift; sourceTree = "<group>"; };
 		ECA89845205BDCE600CEECAC /* Atom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atom.swift; sourceTree = "<group>"; };
+		ECAF7250205FF95300E6A730 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
+		ECAF7253206027E300E6A730 /* SCNMatrix4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNMatrix4.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 				ECA0F0CA205BCB7200B7DA22 /* Models */,
 				EC269345205A6FC70022F39E /* Views */,
 				EC269350205AB98D0022F39E /* Services */,
+				ECAF7252205FF95E00E6A730 /* Utils */,
 				EC26934E205AB87F0022F39E /* ligands.txt */,
 				EC269339205A6B870022F39E /* Assets.xcassets */,
 				EC26933B205A6B870022F39E /* LaunchScreen.storyboard */,
@@ -142,6 +147,15 @@
 				ECA89845205BDCE600CEECAC /* Atom.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		ECAF7252205FF95E00E6A730 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				ECAF7250205FF95300E6A730 /* SCNVector3.swift */,
+				ECAF7253206027E300E6A730 /* SCNMatrix4.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,12 +289,14 @@
 			files = (
 				EC269335205A6B870022F39E /* LigandsController.swift in Sources */,
 				EC269347205A70670022F39E /* LigantCell.swift in Sources */,
+				ECAF7254206027E300E6A730 /* SCNMatrix4.swift in Sources */,
 				EC269333205A6B870022F39E /* AppDelegate.swift in Sources */,
 				EC02FA75205BD6B9006F6A67 /* Link.swift in Sources */,
 				ECA89846205BDCE600CEECAC /* Atom.swift in Sources */,
 				EC269349205A77230022F39E /* ProteinController.swift in Sources */,
 				ECA0F0D0205BCDBC00B7DA22 /* Ligand.swift in Sources */,
 				EC269352205AB9A30022F39E /* LigandsService.swift in Sources */,
+				ECAF7251205FF95300E6A730 /* SCNVector3.swift in Sources */,
 				EC26934B205A77E90022F39E /* AuthenticationController.swift in Sources */,
 				EC26934D205A7E340022F39E /* Constants.swift in Sources */,
 			);
@@ -413,6 +429,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SYLSF63326;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.alegent.SwiftyProteins;
@@ -428,6 +445,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SYLSF63326;
 				INFOPLIST_FILE = SwiftyProteins/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.alegent.SwiftyProteins;
