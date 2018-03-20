@@ -16,7 +16,7 @@ final class ProteinController: GenericViewController {
         didSet {
             guard let ligand = ligand else { return }
             title = ligand.name
-            generateScene(with: ligand)
+            generateModel(with: ligand)
         }
     }
     
@@ -66,61 +66,67 @@ final class ProteinController: GenericViewController {
     }
     
     // MARK:- Scene Logics
-    private func generateScene(with ligand: Ligand) {
-        var atomNodes = [SCNNode]()
-        
-        /* Calculating offsets to center ligand into scene */
-        let offsetX = ligand.atoms.reduce(0) { $0 + $1.position.x } / Float(ligand.atoms.count)
-        let offsetY = ligand.atoms.reduce(0) { $0 + $1.position.y } / Float(ligand.atoms.count)
-        let offsetZ = ligand.atoms.reduce(0) { $0 + $1.position.z } / Float(ligand.atoms.count)
-        
+    // TODO: Maybe don't print hydrogens atom, or only when asked.
+    private func generateModel(with ligand: Ligand) {
         /* Remove ligand node before rebuild it and re-add it to root node. */
         ligandNode?.removeFromParentNode()
-        
-        /* Instanciate a new ligandNode object */
         ligandNode = SCNNode()
         
-        // TODO: Maybe don't print hydrogens atom, or only when asked.
-        
-        /* Adding all atoms into ligandNode */
-        ligand.atoms.forEach { atom in
-            let sphere = SCNSphere()
-            let node = SCNNode(geometry: sphere)
-            let x = atom.position.x - offsetX
-            let y = atom.position.y - offsetY
-            let z = atom.position.z - offsetZ
-            node.position = SCNVector3(x, y, z)
-            sphere.firstMaterial?.diffuse.contents = Colors.CPK[atom.type]
-            ligandNode?.addChildNode(node)
-            atomNodes.append(node)
-        }
-        
-        /* Adding all links between atoms */
-        // TODO: Print multiple connexion when needed.
-        ligand.links.forEach { link in
-            let left = atomNodes[link.left - 1].position
-            let right = atomNodes[link.right - 1].position
-            let height = left.distance(from: right)
-            let cylinder = SCNCylinder(radius: 0.1, height: height)
-            let node = SCNNode(geometry: cylinder)
-            cylinder.firstMaterial?.diffuse.contents = UIColor.black
-            ligandNode?.addChildNode(node)
-            
-            /* Caculate link position */
-            node.position = (left + right) / 2
-            
-            /* Calculating node orientation */
-            let lookat = right - left
-            let newy = lookat.normalized
-            let up = lookat.cross(right).normalized
-            let newx = newy.cross(up).normalized
-            let newz = newx.cross(newy).normalized
-            let transform = SCNMatrix4(x: newx, y: newy, z: newz, w: left)
-            node.transform = SCNMatrix4MakeTranslation(0, lookat.lenght / 2, 0) * transform
-        }
+        /* Generate new models */
+        let nodes = generateModel(with: ligand.atoms)
+        generateModel(with: ligand.links, for: nodes)
         
         /* Adding ligandNode to scene */
         scene.rootNode.addChildNode(ligandNode!)
+    }
+    
+    private func generateModel(with atoms: [Atom]) -> [SCNNode] {
+        /* Calculating offset vector to center ligand into scene */
+        let offsetX = atoms.reduce(0) { $0 + $1.position.x } / Float(atoms.count)
+        let offsetY = atoms.reduce(0) { $0 + $1.position.y } / Float(atoms.count)
+        let offsetZ = atoms.reduce(0) { $0 + $1.position.z } / Float(atoms.count)
+        let offsetVector = SCNVector3(offsetX, offsetY, offsetZ)
+        var nodes = [SCNNode]()
+        
+        /* Adding all atoms into ligandNode */
+        atoms.forEach { atom in
+            let sphere = SCNSphere()
+            let node = SCNNode(geometry: sphere)
+            node.position = atom.position - offsetVector
+            sphere.color = Colors.CPK[atom.type]
+            ligandNode?.addChildNode(node)
+            nodes.append(node)
+        }
+        
+        return nodes
+    }
+    
+    private func generateModel(with links: [Link], for nodes: [SCNNode]) {
+        /* Adding all links between atoms */
+        // TODO: Print multiple connexion when needed.
+        links.forEach { link in
+            let left = nodes[link.left - 1].position
+            let right = nodes[link.right - 1].position
+            let height = left.distance(from: right)
+            let cylinder = SCNCylinder(radius: 0.1, height: height)
+            let node = SCNNode(geometry: cylinder)
+            cylinder.color = .black
+            
+            /* Caculate link position and orientation */
+            node.position = (left + right) / 2
+            node.transform = nodeOrientation(left, right)
+            ligandNode?.addChildNode(node)
+        }
+    }
+    
+    private func nodeOrientation(_ left: SCNVector3, _ right: SCNVector3) -> SCNMatrix4 {
+        let lookat = right - left
+        let y = lookat.normalized
+        let up = lookat.cross(right).normalized
+        let x = y.cross(up).normalized
+        let z = x.cross(y).normalized
+        let transform = SCNMatrix4(x: x, y: y, z: z, w: left)
+        return SCNMatrix4MakeTranslation(0, lookat.lenght / 2, 0) * transform
     }
     
     // MARK:- Button handler
