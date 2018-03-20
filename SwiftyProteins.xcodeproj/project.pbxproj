@@ -24,7 +24,6 @@
 		ECAF7251205FF95300E6A730 /* SCNVector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF7250205FF95300E6A730 /* SCNVector3.swift */; };
 		ECAF7254206027E300E6A730 /* SCNMatrix4.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF7253206027E300E6A730 /* SCNMatrix4.swift */; };
 		ECAF72562060DCD500E6A730 /* SCNGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF72552060DCD500E6A730 /* SCNGeometry.swift */; };
-		ECAF72582061032E00E6A730 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAF72572061032E00E6A730 /* UIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +48,6 @@
 		ECAF7250205FF95300E6A730 /* SCNVector3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNVector3.swift; sourceTree = "<group>"; };
 		ECAF7253206027E300E6A730 /* SCNMatrix4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNMatrix4.swift; sourceTree = "<group>"; };
 		ECAF72552060DCD500E6A730 /* SCNGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNGeometry.swift; sourceTree = "<group>"; };
-		ECAF72572061032E00E6A730 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +157,6 @@
 				ECAF7250205FF95300E6A730 /* SCNVector3.swift */,
 				ECAF7253206027E300E6A730 /* SCNMatrix4.swift */,
 				ECAF72552060DCD500E6A730 /* SCNGeometry.swift */,
-				ECAF72572061032E00E6A730 /* UIView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -303,7 +300,6 @@
 				EC269349205A77230022F39E /* ProteinController.swift in Sources */,
 				ECA0F0D0205BCDBC00B7DA22 /* Ligand.swift in Sources */,
 				EC269352205AB9A30022F39E /* LigandsService.swift in Sources */,
-				ECAF72582061032E00E6A730 /* UIView.swift in Sources */,
 				ECAF7251205FF95300E6A730 /* SCNVector3.swift in Sources */,
 				EC26934B205A77E90022F39E /* AuthenticationController.swift in Sources */,
 				EC26934D205A7E340022F39E /* Constants.swift in Sources */,

@@ -126,7 +126,10 @@ final class ProteinController: GenericViewController {
     }
     
     // MARK:- Button handler
+    /* Take a snapshot from sceneView and share trought activity controller. */
     @objc func handleShare() {
-        
+        let image = sceneView.snapshot()
+        let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        navigationController?.present(controller, animated: true, completion: nil)
     }
 }
