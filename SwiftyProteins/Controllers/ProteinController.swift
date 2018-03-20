@@ -42,6 +42,19 @@ final class ProteinController: GenericViewController {
         return view
     }()
     
+    private let atomLabel: UILabel = {
+        let frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        let label = UILabel(frame: frame)
+        label.backgroundColor = .gray
+        label.textAlignment = .center
+        label.textColor = .white
+        label.alpha = 0
+        label.font = .boldSystemFont(ofSize: 32)
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        return label
+    }()
+    
     // MARK:- View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +66,7 @@ final class ProteinController: GenericViewController {
         super.setupViews()
         view.backgroundColor = Colors.background
         view.addSubview(sceneView)
+        view.addSubview(atomLabel)
     }
     
     override func setupLayouts() {
@@ -126,12 +140,49 @@ final class ProteinController: GenericViewController {
     }
     
     @objc func handleTap(_ sender: UIGestureRecognizer) {
+        /* Getting location in scene view, then hits */
         guard sender.state == .ended else { return }
         let location = sender.location(in: sceneView)
         let hits = sceneView.hitTest(location, options: nil)
         
+        /* Unwrap node and atom from previous hit test */
         guard let node = hits.first?.node else { return }
-        let atom = ligand?.atoms.first(where: { $0.position == node.position })
-        // TODO: Print atom on screen.
+        guard let atom = ligand?.atoms.first(where: { $0.position == node.position }) else { return }
+        
+        /* Setting up label with atom value.
+         * Animate label to appear and disappear once everything is setup */
+        atomLabel.text = atom.type.rawValue
+        atomLabel.frame.origin = sender.location(in: view)
+        atomLabel.frame.origin.x -= 15
+        atomLabel.frame.origin.y -= 40
+        animateAtomLabel()
+    }
+    
+    // MARK:- Label animation logic
+    private func animateAtomLabel() {
+        /* Closure call on tap */
+        let animatedOn = { [unowned self] in
+            self.atomLabel.alpha = 1
+        }
+        
+        /* Closure call after 3 seconds */
+        let animatedOff = { [unowned self] in
+            self.atomLabel.alpha = 0
+        }
+        
+        /* Closure call by timer after 3 seconds.
+         * It just launch animation. */
+        let block: (Timer) -> Void = { _ in
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: animatedOff, completion: nil)
+        }
+        
+        /* Closure call after animation completed.
+         * It launch the 3 seconds timer. */
+        let animationCompletion: (Bool) -> Void = { _ in
+            Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: block)
+        }
+        
+        /* Finally call animation with previous closure. */
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: animatedOn, completion: animationCompletion)
     }
 }
