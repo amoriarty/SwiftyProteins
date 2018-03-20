@@ -34,9 +34,11 @@ final class ProteinController: GenericViewController {
     }()
     
     private lazy var sceneView: SCNView = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         let view = SCNView()
         view.allowsCameraControl = true
         view.scene = scene
+        view.addGestureRecognizer(gesture)
         return view
     }()
     
@@ -70,39 +72,29 @@ final class ProteinController: GenericViewController {
         ligandNode = SCNNode()
         
         /* Generate new models */
-        let nodes = generateModel(with: ligand.atoms)
-        generateModel(with: ligand.links, for: nodes)
+        generateModel(with: ligand.atoms)
+        generateModel(with: ligand.links)
         
         /* Adding ligandNode to scene */
         scene.rootNode.addChildNode(ligandNode!)
     }
     
-    private func generateModel(with atoms: [Atom]) -> [SCNNode] {
-        /* Calculating offset vector to center ligand into scene */
-        let offsetX = atoms.reduce(0) { $0 + $1.position.x } / Float(atoms.count)
-        let offsetY = atoms.reduce(0) { $0 + $1.position.y } / Float(atoms.count)
-        let offsetZ = atoms.reduce(0) { $0 + $1.position.z } / Float(atoms.count)
-        let offsetVector = SCNVector3(offsetX, offsetY, offsetZ)
-        var nodes = [SCNNode]()
-        
+    private func generateModel(with atoms: [Atom]) {
         /* Adding all atoms into ligandNode */
         atoms.forEach { atom in
             let sphere = SCNSphere()
             let node = SCNNode(geometry: sphere)
-            node.position = atom.position - offsetVector
+            node.position = atom.position
             sphere.color = Colors.CPK[atom.type]
             ligandNode?.addChildNode(node)
-            nodes.append(node)
         }
-        
-        return nodes
     }
     
-    private func generateModel(with links: [Link], for nodes: [SCNNode]) {
+    private func generateModel(with links: [Link]) {
         /* Adding all links between atoms */
         links.forEach { link in
-            let left = nodes[link.left - 1].position
-            let right = nodes[link.right - 1].position
+            guard let left = ligand?.atoms[link.left - 1].position else { return }
+            guard let right = ligand?.atoms[link.right - 1].position else { return }
             let height = left.distance(from: right)
             let cylinder = SCNCylinder(radius: 0.1, height: height)
             let node = SCNNode(geometry: cylinder)
@@ -125,11 +117,21 @@ final class ProteinController: GenericViewController {
         return SCNMatrix4MakeTranslation(0, lookat.lenght / 2, 0) * transform
     }
     
-    // MARK:- Button handler
+    // MARK:- Buttons handlers
     /* Take a snapshot from sceneView and share trought activity controller. */
     @objc func handleShare() {
         let image = sceneView.snapshot()
         let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         navigationController?.present(controller, animated: true, completion: nil)
+    }
+    
+    @objc func handleTap(_ sender: UIGestureRecognizer) {
+        guard sender.state == .ended else { return }
+        let location = sender.location(in: sceneView)
+        let hits = sceneView.hitTest(location, options: nil)
+        
+        guard let node = hits.first?.node else { return }
+        let atom = ligand?.atoms.first(where: { $0.position == node.position })
+        // TODO: Print atom on screen.
     }
 }

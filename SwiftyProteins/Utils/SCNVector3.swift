@@ -42,5 +42,10 @@ extension SCNVector3 {
     static func /(_ vector: SCNVector3, _ scalar: Float) -> SCNVector3 {
         return SCNVector3(vector.x / scalar, vector.y / scalar, vector.z / scalar)
     }
+    
+    static func ==(_ left: SCNVector3, _ right: SCNVector3) -> Bool {
+        guard left.x == right.x, left.y == right.y, left.z == left.z else { return false }
+        return true
+    }
 }
 

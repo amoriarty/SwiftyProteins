@@ -48,7 +48,7 @@ final class LigandsService {
         guard let atomIndex = Int(descriptor[1]), atomIndex >= 4 else { return nil }
         
         /* Convert atoms lines into Atom */
-        let atoms = lines[4...atomIndex].flatMap { line -> Atom? in
+        var atoms = lines[4...atomIndex].flatMap { line -> Atom? in
             /* Splitting atom line */
             let atom = line.components(separatedBy: " ").filter { $0 != "" }
             
@@ -57,10 +57,17 @@ final class LigandsService {
             guard let x = Double(atom[0]) else { return nil }
             guard let y = Double(atom[1]) else { return nil }
             guard let z = Double(atom[2]) else { return nil }
-            let coordinate = SCNVector3(x, y, z)
+            let position = SCNVector3(x, y, z)
             
-            return Atom(type: type, position: coordinate)
+            return Atom(type: type, position: position)
         }
+        
+        /* Adjusting atoms positions */
+        let offsetX = atoms.reduce(0) { $0 + $1.position.x } / Float(atoms.count)
+        let offsetY = atoms.reduce(0) { $0 + $1.position.y } / Float(atoms.count)
+        let offsetZ = atoms.reduce(0) { $0 + $1.position.z } / Float(atoms.count)
+        let offsetVector = SCNVector3(offsetX, offsetY, offsetZ)
+        atoms = atoms.map { Atom(type: $0.type, position: $0.position - offsetVector) }
         
         /* Convert links into Link */
         let links = lines[atomIndex + 1 ... lines.count - 4].flatMap { line -> Link? in
