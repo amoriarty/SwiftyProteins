@@ -103,7 +103,6 @@ final class ProteinController: GenericViewController {
     
     private func generateModel(with links: [Link], for nodes: [SCNNode]) {
         /* Adding all links between atoms */
-        // TODO: Print multiple connexion when needed.
         links.forEach { link in
             let left = nodes[link.left - 1].position
             let right = nodes[link.right - 1].position

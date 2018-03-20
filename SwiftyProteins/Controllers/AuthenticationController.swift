@@ -10,7 +10,6 @@ import UIKit
 import ToolboxLGNT
 import LocalAuthentication
 
-// TODO: Can't get out of authentication, even when pressing home.
 final class AuthenticationController: GenericViewController {
     private let authContext = LAContext()
     
@@ -21,6 +20,15 @@ final class AuthenticationController: GenericViewController {
         label.font = .boldSystemFont(ofSize: 32)
         label.textAlignment = .center
         return label
+    }()
+    
+    private let touchButton: UIButton = {
+        let button = UIButton(type: .system)
+        let image = UIImage(named: "Fingerprint")
+        button.setImage(image, for: .normal)
+        button.tintColor = .red
+        button.addTarget(self, action: #selector(handleTouch), for: .touchUpInside)
+        return button
     }()
     
     // MARK:- View Lifecycle
@@ -34,12 +42,14 @@ final class AuthenticationController: GenericViewController {
         super.setupViews()
         view.backgroundColor = Colors.background
         view.addSubview(titleLabel)
+        view.addSubview(touchButton)
     }
     
     override func setupLayouts() {
         super.setupLayouts()
         _ = titleLabel.center(.horizontaly, view.safeAreaLayoutGuide)
         _ = titleLabel.center(.verticaly, view.safeAreaLayoutGuide, multiplier: 0.5)
+        _ = touchButton.center(view.safeAreaLayoutGuide)
     }
     
     // MARK:- Authentication
@@ -65,12 +75,13 @@ final class AuthenticationController: GenericViewController {
     
     private func authenticate() {
         authContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Authenticate in order to unlock application.") { [unowned self] success, error in
-            guard success, error == nil else {
-                self.authenticate()
-                return
-            }
-            
+            guard success, error == nil else { return }
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    // MARK:- Button handle
+    @objc func handleTouch() {
+        authenticate()
     }
 }
