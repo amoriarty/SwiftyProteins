@@ -37,8 +37,6 @@ final class ProteinController: GenericViewController {
         let view = SCNView()
         view.allowsCameraControl = true
         view.scene = scene
-        // TODO: Remove statistics
-        view.showsStatistics = true
         return view
     }()
     
@@ -66,7 +64,6 @@ final class ProteinController: GenericViewController {
     }
     
     // MARK:- Scene Logics
-    // TODO: Maybe don't print hydrogens atom, or only when asked.
     private func generateModel(with ligand: Ligand) {
         /* Remove ligand node before rebuild it and re-add it to root node. */
         ligandNode?.removeFromParentNode()
@@ -130,6 +127,6 @@ final class ProteinController: GenericViewController {
     
     // MARK:- Button handler
     @objc func handleShare() {
-        // TODO: Implement handle share
+        
     }
 }
