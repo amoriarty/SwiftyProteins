@@ -2,7 +2,7 @@
 //  SCNGeometry.swift
 //  SwiftyProteins
 //
-//  Created by Émilie Legent on 20/03/2018.
+//  Created by Alexandre Legent on 20/03/2018.
 //  Copyright © 2018 Alexandre LEGENT. All rights reserved.
 //
 

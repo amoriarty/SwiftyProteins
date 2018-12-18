@@ -48,7 +48,7 @@ final class LigandsService {
         guard let atomIndex = Int(descriptor[1]), atomIndex >= 4 else { return nil }
         
         /* Convert atoms lines into Atom */
-        var atoms = lines[4...atomIndex].flatMap { line -> Atom? in
+        var atoms = lines[4...atomIndex].compactMap { line -> Atom? in
             /* Splitting atom line */
             let atom = line.components(separatedBy: " ").filter { $0 != "" }
             
@@ -70,7 +70,7 @@ final class LigandsService {
         atoms = atoms.map { Atom(type: $0.type, position: $0.position - offsetVector) }
         
         /* Convert links into Link */
-        let links = lines[atomIndex + 1 ... lines.count - 4].flatMap { line -> Link? in
+        let links = lines[atomIndex + 1 ... lines.count - 4].compactMap { line -> Link? in
             /* Splitting link line */
             let link = line.components(separatedBy: " ").filter { $0 != "" }
             
